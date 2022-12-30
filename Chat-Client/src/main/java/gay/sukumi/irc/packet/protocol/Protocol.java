@@ -38,6 +38,7 @@ public class Protocol extends HydraProtocol {
         registerPacket(SKeepAlivePacket.class);
 
         registerListener(new PacketHandler());
+
     }
 
 }

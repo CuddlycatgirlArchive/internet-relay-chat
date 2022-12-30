@@ -6,6 +6,7 @@ import de.datasecs.hydra.shared.protocol.packets.listener.Handler;
 import de.datasecs.hydra.shared.protocol.packets.listener.HydraPacketListener;
 import gay.sukumi.irc.ChatClient;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
+import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket;
 import gay.sukumi.irc.packet.packet.impl.login.LoginErrorPacket;
 import gay.sukumi.irc.packet.packet.impl.login.LoginSuccessPacket;
 import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
@@ -86,6 +87,16 @@ public class PacketHandler implements HydraPacketListener {
     public void onPacket(final SMessagePacket packet, final Session session) {
         if (ChatClient.INSTANCE.getMessageListener() != null)
             ChatClient.INSTANCE.getMessageListener().onMessage(packet.getMessage(), packet.getType(), packet.getUserProfile());
+    }
+
+    /**
+     * This function will be executed when the server sends a keep alive packet.
+     *
+     * @param packet  Keep-alive packet itself
+     * @param session Client session
+     */
+    @Handler
+    public void onPacket(final SKeepAlivePacket packet, final Session session) {
     }
 
 }
