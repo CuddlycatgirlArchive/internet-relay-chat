@@ -6,7 +6,7 @@ import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 
 public class RebootCommand extends Command {
     public RebootCommand() {
-        super(new String[]{""}, "Reboots the thing.", "reboot");
+        super(new String[]{""}, "Restarts the chat server", "reboot");
     }
 
     @Override

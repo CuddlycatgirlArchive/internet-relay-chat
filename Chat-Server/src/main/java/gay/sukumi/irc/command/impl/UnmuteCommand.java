@@ -17,7 +17,7 @@ public class UnmuteCommand extends Command {
     public void onExecute(Session session, UserProfile profile, String[] args) {
 
         if (profile.getRank() != UserProfile.Rank.ADMIN) {
-            session.send(new SMessagePacket("" + getAliases()[0] + ": Permission denied"));
+            session.send(new SMessagePacket("You do not have enough permissions to execute this command. The minimum rank you need for this is Administrator."));
             return;
         }
 
@@ -33,7 +33,7 @@ public class UnmuteCommand extends Command {
         }
         userProfile.setMuted(false);
         Database.INSTANCE.editUser(userProfile);
-        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " unmuted " + userProfile.username));
+        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " unmuted " + userProfile.getUsername()));
         super.onExecute(session, profile, args);
     }
 }

@@ -13,10 +13,15 @@ public class CommandRegistry {
     final List<Command> commands = new LinkedList<>();
 
     public void init() {
+        addCommand(new HelpCommand());
         addCommand(new UnmuteCommand());
         addCommand(new MuteCommand());
         addCommand(new BroadcastCommand());
         addCommand(new SendAsCommand());
+        addCommand(new PasswordCommand());
+        addCommand(new RemoveUserCommand());
+        addCommand(new UsernameCommand());
+        addCommand(new RankCommand());
         addCommand(new AddUserCommand());
         addCommand(new RebootCommand());
     }

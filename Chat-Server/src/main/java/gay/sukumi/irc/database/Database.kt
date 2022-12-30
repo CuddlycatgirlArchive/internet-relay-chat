@@ -68,6 +68,13 @@ class Database {
         usersCollection.updateOne(query, updates)
     }
 
+    fun removeUser(account: Account) {
+        val usersCollection = mongoDB.getCollection("users")
+        val query = Document().append("username", account.username)
+
+        usersCollection.deleteOne(query)
+    }
+
     fun createUser(account: Account) {
         val usersCollection = mongoDB.getCollection("users")
         val accounts = Document("username", account.username).append("password", account.password).append("rank", account.rank.name).append("muted", account.isMuted).append("banned", account.isBanned)

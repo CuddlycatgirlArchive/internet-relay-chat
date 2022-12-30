@@ -7,7 +7,7 @@ import gay.sukumi.irc.profile.UserProfile;
 
 public class SendAsCommand extends Command {
     public SendAsCommand() {
-        super(new String[]{"message"}, "Broadcast.", "sendas", "send");
+        super(new String[]{"message"}, "Sends messages as another user", "send", "sendas");
     }
 
     @Override

@@ -1,14 +1,14 @@
 package gay.sukumi.cli.impl;
 
 import gay.sukumi.cli.Command;
+import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
-import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 
-public class UnmuteCommand extends Command {
-    public UnmuteCommand() {
-        super(new String[]{"user"}, "Removes the message restriction", "unmute");
+public class RemoveUserCommand extends Command {
+    public RemoveUserCommand() {
+        super(new String[]{"user"}, "Removes a user from the database", "rmuser", "removeuser");
     }
 
     @Override
@@ -20,11 +20,10 @@ public class UnmuteCommand extends Command {
 
         Account userProfile = Database.INSTANCE.getUser(args[0]);
         if (userProfile == null) {
-            ChatServer.LOGGER.error("User not found");
+            System.out.println(" \033[91mUser not found");
             return;
         }
-        userProfile.setMuted(false);
-        Database.INSTANCE.editUser(userProfile);
-        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket("Unmuted " + userProfile.getUsername()));
+        Database.INSTANCE.removeUser(userProfile);
+        ChatServer.LOGGER.info("Removed user");
     }
 }

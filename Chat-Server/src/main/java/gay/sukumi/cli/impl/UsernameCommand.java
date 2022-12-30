@@ -1,19 +1,18 @@
 package gay.sukumi.cli.impl;
 
 import gay.sukumi.cli.Command;
+import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
-import gay.sukumi.irc.ChatServer;
-import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 
-public class MuteCommand extends Command {
-    public MuteCommand() {
-        super(new String[]{"user"}, "Gives the user a message restriction", "mute");
+public class UsernameCommand extends Command {
+    public UsernameCommand() {
+        super(new String[]{"user", "username"}, "Changes a users name", "username", "user", "changeuser");
     }
 
     @Override
     public void onExecute(String[] args) {
-        if (args.length < 1) {
+        if (args.length < 2) {
             sendUsage();
             return;
         }
@@ -23,8 +22,8 @@ public class MuteCommand extends Command {
             System.out.println(" \033[91mUser not found");
             return;
         }
-        userProfile.setMuted(true);
+        userProfile.setPassword(args[1]);
         Database.INSTANCE.editUser(userProfile);
-        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket("Muted " + userProfile.getUsername()));
+        ChatServer.LOGGER.info("Changed username");
     }
 }

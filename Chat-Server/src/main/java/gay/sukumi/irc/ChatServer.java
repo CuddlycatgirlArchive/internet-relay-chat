@@ -60,7 +60,7 @@ public class ChatServer {
                         if (account == null) {
                             return;
                         }
-                        profile.setRank(account.rank);
+                        profile.setRank(account.getRank());
                     });
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {}
@@ -84,7 +84,7 @@ public class ChatServer {
                             UserProfile userProfile = getProfileHashMap().get(session);
                             broadcastPacket(new SProfilePacket(SProfilePacket.Action.REMOVE, userProfile));
                             getProfileHashMap().remove(session);
-                            LOGGER.info(String.format("[%s] User '%s' logged out.", userProfile.getClient().getName(), userProfile.getUsername()));
+                            LOGGER.info(String.format("User '%s' logged out.", userProfile.getUsername()));
                         }
                     }
                 }).build();
@@ -105,14 +105,12 @@ public class ChatServer {
             SMessagePacket messagePacket = (SMessagePacket) packet;
             switch (messagePacket.getType()) {
                 case RAW:
-                    MESSAGE_LOGGER.info(String.format("[%s] %s: %s",
-                            "None",
+                    MESSAGE_LOGGER.info(String.format("%s: %s",
                             "System",
                             messagePacket.getMessage()));
                     break;
                 case USER:
-                    MESSAGE_LOGGER.info(String.format("[%s] %s: %s",
-                            messagePacket.getUserProfile().getClient().getName(),
+                    MESSAGE_LOGGER.info(String.format("%s: %s",
                             messagePacket.getUserProfile().getUsername(),
                             messagePacket.getMessage()));
                     break;

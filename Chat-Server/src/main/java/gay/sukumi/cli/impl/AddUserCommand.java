@@ -8,7 +8,7 @@ import gay.sukumi.irc.profile.UserProfile;
 
 public class AddUserCommand extends Command {
     public AddUserCommand() {
-        super(new String[]{"username", "password", "admin"}, "Adds an user.", "adduser", "createuser");
+        super(new String[]{"username", "password", "admin"}, "Adds a user to the database", "adduser", "createuser");
     }
 
     @Override

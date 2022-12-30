@@ -23,7 +23,7 @@ public class SMessagePacket extends Packet {
     }
 
     public SMessagePacket(final String message) {
-        this.message = EnumChatFormatting.getTextWithoutFormattingCodes(message);
+        this.message = message;
         this.type = Type.RAW;
     }
 
@@ -33,7 +33,7 @@ public class SMessagePacket extends Packet {
 
     @Override
     public void write(ByteBuf byteBuf) {
-        writeString(byteBuf, Crypter.encode(EnumChatFormatting.getTextWithoutFormattingCodes(message)));
+        writeString(byteBuf, Crypter.encode(message));
         writeString(byteBuf, getType().name());
         if (type != Type.RAW)
             writeUserProfile(byteBuf, userProfile);

@@ -31,9 +31,10 @@ public class MuteCommand extends Command {
             session.send(new SMessagePacket(args[0] + ": User not found"));
             return;
         }
+
         userProfile.setMuted(true);
         Database.INSTANCE.editUser(userProfile);
-        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " muted " + userProfile.username));
+        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " muted " + userProfile.getUsername()));
         super.onExecute(session, profile, args);
     }
 }

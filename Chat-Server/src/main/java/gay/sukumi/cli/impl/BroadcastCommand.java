@@ -6,7 +6,7 @@ import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 
 public class BroadcastCommand extends Command {
     public BroadcastCommand() {
-        super(new String[]{"message"}, "Broadcast.", "broadcast", "bc");
+        super(new String[]{"message"}, "Broadcast a message", "broadcast", "bc");
     }
 
     @Override

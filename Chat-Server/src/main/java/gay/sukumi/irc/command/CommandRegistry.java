@@ -3,8 +3,7 @@ package gay.sukumi.irc.command;
 
 import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.ChatServer;
-import gay.sukumi.irc.command.impl.MuteCommand;
-import gay.sukumi.irc.command.impl.UnmuteCommand;
+import gay.sukumi.irc.command.impl.*;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.profile.UserProfile;
 
@@ -17,6 +16,10 @@ public class CommandRegistry {
     public void init() {
         addCommand(new UnmuteCommand());
         addCommand(new MuteCommand());
+        addCommand(new RemoveUserCommand());
+        addCommand(new RankCommand());
+        addCommand(new PasswordCommand());
+        addCommand(new AddUserCommand());
     }
 
     private void addCommand(Command cmd) {
@@ -42,12 +45,11 @@ public class CommandRegistry {
         final String[] a = Arrays.copyOfRange(s, 1, s.length);
         final Command command = this.getCommand(c);
         if (command == null) {
-            session.send(new SMessagePacket(null, SMessagePacket.Type.RAW, c + ": Command not found"));
+            session.send(new SMessagePacket(null, SMessagePacket.Type.RAW, "Invalid command."));
             return;
         }
 
         command.onExecute(session, profile, a);
-        ChatServer.COMMAND_LOGGER.info("User '%s' executed '" + command.getAliases()[0] + "'.");
     }
 
 }
