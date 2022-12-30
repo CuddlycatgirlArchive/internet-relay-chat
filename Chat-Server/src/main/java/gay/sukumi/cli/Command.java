@@ -1,4 +1,4 @@
-package gay.sukumi.clicommands;
+package gay.sukumi.cli;
 
 import gay.sukumi.irc.ChatServer;
 

@@ -1,7 +1,7 @@
-package gay.sukumi.clicommands;
+package gay.sukumi.cli;
 
 
-import gay.sukumi.clicommands.impl.*;
+import gay.sukumi.cli.impl.*;
 import gay.sukumi.irc.ChatServer;
 
 import java.util.Arrays;

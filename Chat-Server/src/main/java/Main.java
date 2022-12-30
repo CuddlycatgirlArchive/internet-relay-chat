@@ -1,12 +1,7 @@
-import gay.sukumi.clicommands.Command;
-import gay.sukumi.clicommands.CommandRegistry;
-import gay.sukumi.irc.database.Account;
+import gay.sukumi.cli.CommandRegistry;
 import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.ChatServer;
-import gay.sukumi.irc.profile.UserProfile;
-import org.apache.logging.log4j.LogManager;
 
-import javax.xml.crypto.Data;
 import java.net.InetSocketAddress;
 import java.util.Scanner;
 

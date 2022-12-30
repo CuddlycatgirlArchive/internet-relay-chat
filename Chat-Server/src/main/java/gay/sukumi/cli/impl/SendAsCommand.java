@@ -1,6 +1,6 @@
-package gay.sukumi.clicommands.impl;
+package gay.sukumi.cli.impl;
 
-import gay.sukumi.clicommands.Command;
+import gay.sukumi.cli.Command;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.profile.UserProfile;
