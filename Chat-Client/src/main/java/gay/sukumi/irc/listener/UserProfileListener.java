@@ -7,7 +7,7 @@ public interface UserProfileListener {
     void onConnected(UserProfile profile);
     void onDisconnected(UserProfile profile);
 
-    void onNameChange(UserProfile newProfile, UserProfile oldProfile);
-    void onServerChange(UserProfile newProfile, UserProfile oldProfile);
+    void onNameChange(UserProfile newProfile);
+    void onServerChange(UserProfile newProfile);
 
 }

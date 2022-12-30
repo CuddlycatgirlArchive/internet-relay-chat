@@ -68,11 +68,11 @@ public class PacketHandler implements HydraPacketListener {
                 break;
             case CHANGE_NAME:
                 if (ChatClient.INSTANCE.getUserProfileListener() != null)
-                    ChatClient.INSTANCE.getUserProfileListener().onNameChange(packet.getProfile(), packet.getOldProfile());
+                    ChatClient.INSTANCE.getUserProfileListener().onNameChange(packet.getProfile());
                 break;
             case CHANGE_SERVER:
                 if (ChatClient.INSTANCE.getUserProfileListener() != null)
-                    ChatClient.INSTANCE.getUserProfileListener().onServerChange(packet.getProfile(), packet.getOldProfile());
+                    ChatClient.INSTANCE.getUserProfileListener().onServerChange(packet.getProfile());
                 break;
         }
     }
