@@ -1,12 +1,12 @@
 package gay.sukumi.irc;
 
-import de.datasecs.hydra.server.HydraServer;
-import de.datasecs.hydra.server.Server;
-import de.datasecs.hydra.shared.handler.Session;
-import de.datasecs.hydra.shared.handler.listener.HydraSessionListener;
-import de.datasecs.hydra.shared.protocol.packets.Packet;
-import gay.sukumi.database.Account;
-import gay.sukumi.database.Database;
+import gay.sukumi.hydra.server.HydraServer;
+import gay.sukumi.hydra.server.Server;
+import gay.sukumi.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.listener.HydraSessionListener;
+import gay.sukumi.hydra.shared.protocol.packets.Packet;
+import gay.sukumi.irc.database.Account;
+import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.command.CommandRegistry;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;

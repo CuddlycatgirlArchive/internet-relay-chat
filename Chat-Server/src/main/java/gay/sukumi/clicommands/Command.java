@@ -1,9 +1,6 @@
 package gay.sukumi.clicommands;
 
-import de.datasecs.hydra.shared.handler.Session;
 import gay.sukumi.irc.ChatServer;
-import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
-import gay.sukumi.irc.profile.UserProfile;
 
 public class Command {
 

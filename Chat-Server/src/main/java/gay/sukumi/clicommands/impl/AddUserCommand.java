@@ -1,8 +1,8 @@
 package gay.sukumi.clicommands.impl;
 
 import gay.sukumi.clicommands.Command;
-import gay.sukumi.database.Account;
-import gay.sukumi.database.Database;
+import gay.sukumi.irc.database.Account;
+import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.profile.UserProfile;
 

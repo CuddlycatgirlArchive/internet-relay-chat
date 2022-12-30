@@ -1,8 +1,8 @@
 package gay.sukumi.irc.command.impl;
 
-import de.datasecs.hydra.shared.handler.Session;
-import gay.sukumi.database.Account;
-import gay.sukumi.database.Database;
+import gay.sukumi.hydra.shared.handler.Session;
+import gay.sukumi.irc.database.Account;
+import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.command.Command;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;

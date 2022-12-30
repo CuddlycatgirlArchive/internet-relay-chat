@@ -1,7 +1,7 @@
 package gay.sukumi.irc.command;
 
 
-import de.datasecs.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.command.impl.MuteCommand;
 import gay.sukumi.irc.command.impl.UnmuteCommand;

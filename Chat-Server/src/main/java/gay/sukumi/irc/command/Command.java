@@ -1,6 +1,6 @@
 package gay.sukumi.irc.command;
 
-import de.datasecs.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.profile.UserProfile;
 
