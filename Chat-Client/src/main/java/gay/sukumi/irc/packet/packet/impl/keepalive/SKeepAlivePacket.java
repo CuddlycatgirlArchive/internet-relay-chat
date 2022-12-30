@@ -1,15 +1,13 @@
-package gay.sukumi.irc.packet.packet.impl;
+package gay.sukumi.irc.packet.packet.impl.keepalive;
 
 import de.datasecs.hydra.shared.protocol.packets.Packet;
 import de.datasecs.hydra.shared.protocol.packets.PacketId;
-import gay.sukumi.irc.ChatClient;
-import gay.sukumi.irc.utils.Crypter;
 import io.netty.buffer.ByteBuf;
 
-@PacketId(Byte.MAX_VALUE)
-public class KeepAlivePacket extends Packet {
+@PacketId(26)
+public class SKeepAlivePacket extends Packet {
 
-    public KeepAlivePacket() {}
+    public SKeepAlivePacket() {}
 
     @Override
     public void read(ByteBuf byteBuf) {}

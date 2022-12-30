@@ -8,11 +8,13 @@ import gay.sukumi.hydra.shared.protocol.packets.Packet;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.command.CommandRegistry;
+import gay.sukumi.irc.handler.KeepAliveHandler;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
 import gay.sukumi.irc.packet.protocol.Protocol;
 import gay.sukumi.irc.profile.UserProfile;
-import io.netty.channel.ChannelOption;
+import io.netty.channel.Channel;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +24,7 @@ import java.util.HashMap;
 /**
  * The main class of the internet relay chat server.
  *
- * @author kittyuwu
+ * @author Lucy
  **/
 @SuppressWarnings("unused")
 public class ChatServer {
@@ -72,7 +74,6 @@ public class ChatServer {
                 socketAddress.getHostString(), socketAddress.getPort(),
                 new Protocol())
                 .workerThreads(4)
-                .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .addListener(new HydraSessionListener() {
                     @Override
                     public void onConnected(Session session) {
@@ -165,6 +166,37 @@ public class ChatServer {
         }
         return null;
     }
+
+    /**
+     * Gets a user profile by their channel.
+     *
+     * @param channel the channel
+     * @return user profile
+     */
+    public UserProfile getProfileByChannel(Channel channel) {
+        for (Session session : profileHashMap.keySet()) {
+            if(session.getChannel() == channel) {
+                return profileHashMap.get(session);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets a user profile by their channel.
+     *
+     * @param channel the channel
+     * @return session
+     */
+    public Session getSessionByChannel(Channel channel) {
+        for (Session session : profileHashMap.keySet()) {
+            if(session.getChannel() == channel) {
+                return session;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Close the chat server.

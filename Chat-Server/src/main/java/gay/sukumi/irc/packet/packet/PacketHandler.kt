@@ -3,10 +3,12 @@ package gay.sukumi.irc.packet.packet
 import gay.sukumi.hydra.shared.handler.Session
 import gay.sukumi.hydra.shared.protocol.packets.listener.Handler
 import gay.sukumi.hydra.shared.protocol.packets.listener.HydraPacketListener
-import gay.sukumi.irc.database.Database
 import gay.sukumi.irc.ChatServer
+import gay.sukumi.irc.database.Database
 import gay.sukumi.irc.packet.packet.impl.chat.CMessagePacket
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket
+import gay.sukumi.irc.packet.packet.impl.keepalive.CKeepAlivePacket
+import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginErrorPacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginRequestPacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginSuccessPacket
@@ -20,7 +22,7 @@ import java.util.function.Consumer
 /**
  * I don't feel like commenting this too much.
  *
- * @author kittyuwu
+ * @author Lucy
  */
 @Suppress("unused")
 class PacketHandler : HydraPacketListener {
@@ -144,7 +146,7 @@ class PacketHandler : HydraPacketListener {
         val userProfile = ChatServer.INSTANCE.getProfileByUUID(packet.uuid)
         val account = Database.INSTANCE.getUser(userProfile.username) ?: return
 
-        if(packet.message.isEmpty()) {
+        if (packet.message.isEmpty()) {
             return
         }
 
@@ -159,5 +161,10 @@ class PacketHandler : HydraPacketListener {
         }
 
         ChatServer.INSTANCE.broadcastPacket(SMessagePacket(userProfile, SMessagePacket.Type.USER, packet.message))
+    }
+
+    @Handler
+    fun onPacket(packet: CKeepAlivePacket, session: Session) {
+        session.send(SKeepAlivePacket())
     }
 }

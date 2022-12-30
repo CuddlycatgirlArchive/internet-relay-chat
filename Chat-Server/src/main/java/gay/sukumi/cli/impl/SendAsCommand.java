@@ -18,7 +18,7 @@ public class SendAsCommand extends Command {
         }
         StringBuilder test = new StringBuilder();
         for (int i = 1; i < args.length; i++) {
-            test.append(args[i]);
+            test.append(args[i]).append(" ");
         }
 
         UserProfile userProfile = ChatServer.INSTANCE.getProfileByName(args[0]);

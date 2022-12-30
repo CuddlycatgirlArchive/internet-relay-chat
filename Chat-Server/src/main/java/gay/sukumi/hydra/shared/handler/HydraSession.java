@@ -42,7 +42,7 @@ public class HydraSession extends SimpleChannelInboundHandler<Packet> implements
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
+        protocol.exceptionCaught(ctx, cause);
     }
 
     @Override

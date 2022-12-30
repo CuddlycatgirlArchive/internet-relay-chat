@@ -13,7 +13,7 @@ import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
 /**
  * I don't feel like commenting this too much.
  *
- * @author kittyuwu
+ * @author Lucy
  */
 public class PacketHandler implements HydraPacketListener {
 
@@ -87,6 +87,5 @@ public class PacketHandler implements HydraPacketListener {
         if (ChatClient.INSTANCE.getMessageListener() != null)
             ChatClient.INSTANCE.getMessageListener().onMessage(packet.getMessage(), packet.getType(), packet.getUserProfile());
     }
-
 
 }

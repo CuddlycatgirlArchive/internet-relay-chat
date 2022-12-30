@@ -5,6 +5,7 @@ import de.datasecs.hydra.client.HydraClient;
 import de.datasecs.hydra.shared.handler.Session;
 import de.datasecs.hydra.shared.handler.listener.HydraSessionListener;
 import de.datasecs.hydra.shared.protocol.packets.Packet;
+import gay.sukumi.irc.handler.KeepAliveHandler;
 import gay.sukumi.irc.listener.ConnectionListener;
 import gay.sukumi.irc.listener.LoginListener;
 import gay.sukumi.irc.listener.MessageListener;
@@ -14,6 +15,7 @@ import gay.sukumi.irc.packet.packet.impl.profile.CProfilePacket;
 import gay.sukumi.irc.packet.protocol.Protocol;
 import gay.sukumi.irc.profile.UserProfile;
 import io.netty.channel.ChannelOption;
+import io.netty.handler.timeout.IdleStateHandler;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.List;
 
 /**
  * The main class of the internet relay cht.
- * @author kittyuwu
+ * @author Lucy
  **/
 public class ChatClient {
 
@@ -58,7 +60,10 @@ public class ChatClient {
                 .addSessionListener(new HydraSessionListener() {
                     @Override
                     public void onConnected(Session session) {
-                        if(getConnectionListener() != null) getConnectionListener().onConnected(socketAddress.getHostName(), session);
+                        session.getChannel().pipeline().addLast("timeout", new IdleStateHandler(10, 5, 0));
+                        session.getChannel().pipeline().addLast("handler", new KeepAliveHandler());
+                        if (getConnectionListener() != null)
+                            getConnectionListener().onConnected(socketAddress.getHostName(), session);
                     }
 
                     @Override

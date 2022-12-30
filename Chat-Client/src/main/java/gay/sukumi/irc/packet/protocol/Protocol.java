@@ -2,9 +2,10 @@ package gay.sukumi.irc.packet.protocol;
 
 import de.datasecs.hydra.shared.protocol.HydraProtocol;
 import gay.sukumi.irc.packet.packet.PacketHandler;
-import gay.sukumi.irc.packet.packet.impl.KeepAlivePacket;
 import gay.sukumi.irc.packet.packet.impl.chat.CMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
+import gay.sukumi.irc.packet.packet.impl.keepalive.CKeepAlivePacket;
+import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket;
 import gay.sukumi.irc.packet.packet.impl.login.LoginErrorPacket;
 import gay.sukumi.irc.packet.packet.impl.login.LoginRequestPacket;
 import gay.sukumi.irc.packet.packet.impl.login.LoginSuccessPacket;
@@ -13,7 +14,8 @@ import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
 
 /**
  * The chat client protocol
- * @author kittyuwu
+ *
+ * @author Lucy
  */
 public class Protocol extends HydraProtocol {
 
@@ -32,7 +34,8 @@ public class Protocol extends HydraProtocol {
         registerPacket(CProfilePacket.class);
         registerPacket(SProfilePacket.class);
 
-        registerPacket(KeepAlivePacket.class);
+        registerPacket(CKeepAlivePacket.class);
+        registerPacket(SKeepAlivePacket.class);
 
         registerListener(new PacketHandler());
     }

@@ -7,6 +7,7 @@ import gay.sukumi.hydra.shared.protocol.packets.PacketId;
 import gay.sukumi.hydra.shared.protocol.packets.StandardPacket;
 import gay.sukumi.hydra.shared.protocol.packets.listener.Handler;
 import gay.sukumi.hydra.shared.protocol.packets.listener.HydraPacketListener;
+import io.netty.channel.ChannelHandlerContext;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -157,5 +158,8 @@ public class HydraProtocol {
 
     public HydraPacketListener getPacketListener() {
         return packetListener;
+    }
+
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
     }
 }

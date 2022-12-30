@@ -66,10 +66,10 @@ public class Test {
 
 
         /* Connect to the IRC */
-        ChatClient.INSTANCE.connect(new InetSocketAddress("irc.sukumi.gay", 8888),
+        ChatClient.INSTANCE.connect(new InetSocketAddress("chat.enslave.africa", 8888),
                 "lucy",
                 "meow123",
-                "awdaw",
+                "no",
                 UserProfile.Client.SUKUMI);
 
         /* Add shutdown hook */
