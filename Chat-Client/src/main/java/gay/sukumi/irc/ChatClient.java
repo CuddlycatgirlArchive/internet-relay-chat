@@ -142,7 +142,14 @@ public class ChatClient {
 
     public UserProfile getUser(String username) {
         for (UserProfile connectedUser : connectedUsers) {
-            if(connectedUser.getUsername().equalsIgnoreCase(username)) return connectedUser;
+            if (connectedUser.getUsername().equalsIgnoreCase(username)) return connectedUser;
+        }
+        return null;
+    }
+
+    public UserProfile getUserByMcName(String username) {
+        for (UserProfile connectedUser : connectedUsers) {
+            if (connectedUser.getMcUsername().equalsIgnoreCase(username)) return connectedUser;
         }
         return null;
     }
