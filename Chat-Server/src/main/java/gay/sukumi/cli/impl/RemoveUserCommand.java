@@ -4,7 +4,6 @@ import gay.sukumi.cli.Command;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
-import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 
 public class RemoveUserCommand extends Command {
     public RemoveUserCommand() {

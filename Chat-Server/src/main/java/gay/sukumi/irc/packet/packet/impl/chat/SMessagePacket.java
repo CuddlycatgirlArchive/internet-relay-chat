@@ -14,7 +14,8 @@ public class SMessagePacket extends Packet {
     private String message;
     private Type type;
 
-    public SMessagePacket() {}
+    public SMessagePacket() {
+    }
 
     public SMessagePacket(final UserProfile profile, final Type type, final String message) {
         this.message = EnumChatFormatting.getTextWithoutFormattingCodes(message);

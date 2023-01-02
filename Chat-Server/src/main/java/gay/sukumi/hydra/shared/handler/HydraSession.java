@@ -15,9 +15,9 @@ import java.net.SocketAddress;
  */
 public class HydraSession extends SimpleChannelInboundHandler<Packet> implements Session {
 
-    private Channel channel;
+    private final Channel channel;
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
     public HydraSession(Channel channel, HydraProtocol protocol) {
         this.channel = channel;

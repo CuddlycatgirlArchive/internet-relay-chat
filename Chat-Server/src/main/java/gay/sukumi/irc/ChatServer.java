@@ -5,17 +5,15 @@ import gay.sukumi.hydra.server.Server;
 import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.hydra.shared.handler.listener.HydraSessionListener;
 import gay.sukumi.hydra.shared.protocol.packets.Packet;
+import gay.sukumi.irc.command.CommandRegistry;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
-import gay.sukumi.irc.command.CommandRegistry;
-import gay.sukumi.irc.handler.KeepAliveHandler;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
 import gay.sukumi.irc.packet.protocol.Protocol;
 import gay.sukumi.irc.profile.UserProfile;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.timeout.IdleStateHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,14 +37,13 @@ public class ChatServer {
     public static final Logger COMMAND_LOGGER = LogManager.getLogger("Command");
 
     private final CommandRegistry commandRegistry = new CommandRegistry();
-
+    private final HashMap<Session, UserProfile> profileHashMap = new HashMap<>();
     /* ~~ Hydra server ~~ */
     private HydraServer hServer;
 
-    private final HashMap<Session, UserProfile> profileHashMap = new HashMap<>();
-
     /**
      * Bind the chat server.
+     *
      * @param socketAddress The ip address & port of the internet relay chat
      */
     @SuppressWarnings("all")
@@ -64,9 +61,11 @@ public class ChatServer {
                             return;
                         }
                         profile.setRank(account.getRank());
+                        profile.setPermissions(account.getPermissions());
                     });
                     Thread.sleep(1000);
-                } catch (InterruptedException ignored) {}
+                } catch (InterruptedException ignored) {
+                }
             }
         }).start();
 
@@ -108,7 +107,7 @@ public class ChatServer {
      * @param packet Packet that will be sent to the clients
      */
     public void broadcastPacket(Packet packet) {
-        if(packet instanceof SMessagePacket) {
+        if (packet instanceof SMessagePacket) {
             SMessagePacket messagePacket = (SMessagePacket) packet;
             switch (messagePacket.getType()) {
                 case RAW:
@@ -181,7 +180,7 @@ public class ChatServer {
      */
     public UserProfile getProfileByChannel(Channel channel) {
         for (Session session : profileHashMap.keySet()) {
-            if(session.getChannel() == channel) {
+            if (session.getChannel() == channel) {
                 return profileHashMap.get(session);
             }
         }
@@ -196,7 +195,7 @@ public class ChatServer {
      */
     public Session getSessionByChannel(Channel channel) {
         for (Session session : profileHashMap.keySet()) {
-            if(session.getChannel() == channel) {
+            if (session.getChannel() == channel) {
                 return session;
             }
         }

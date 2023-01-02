@@ -26,9 +26,9 @@ public class HydraClient {
 
     private Channel channel;
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
-    private EventLoopGroup workerGroup;
+    private final EventLoopGroup workerGroup;
 
     private Session clientSession;
 

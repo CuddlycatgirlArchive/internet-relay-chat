@@ -1,5 +1,8 @@
 package gay.sukumi.irc.profile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserProfile {
 
     private String username;
@@ -8,6 +11,7 @@ public class UserProfile {
     private String currentServer;
     private Rank rank;
     private Client client;
+    private List<String> permissions = new ArrayList<>();
 
     public UserProfile() {
     }
@@ -63,6 +67,14 @@ public class UserProfile {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 
     public enum Rank {

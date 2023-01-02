@@ -24,25 +24,25 @@ public class Server {
 
     public static class Builder {
 
-        private String host;
+        private final String host;
 
-        private int port;
+        private final int port;
 
         private int workerThreads = 2;
 
         private int bossThreads = 1;
 
-        private Map<ChannelOption, Object> options = new HashMap<>();
+        private final Map<ChannelOption, Object> options = new HashMap<>();
 
-        private Map<ChannelOption, Object> childOptions = new HashMap<>();
+        private final Map<ChannelOption, Object> childOptions = new HashMap<>();
 
-        private Map<AttributeKey, Object> attributeKeys = new HashMap<>();
+        private final Map<AttributeKey, Object> attributeKeys = new HashMap<>();
 
-        private Map<AttributeKey, Object> childAttributeKeys = new HashMap<>();
+        private final Map<AttributeKey, Object> childAttributeKeys = new HashMap<>();
 
         private boolean useEpoll;
 
-        private HydraProtocol protocol;
+        private final HydraProtocol protocol;
 
         public Builder(String host, int port, HydraProtocol protocol) {
             this.host = host;
@@ -79,8 +79,7 @@ public class Server {
          * These options include a lot of possibilities.
          *
          * @param channelOption the desired channel option
-         * @param value the value that is supposed to be set for the desired channel option
-         *
+         * @param value         the value that is supposed to be set for the desired channel option
          * @see <a href="https://netty.io/4.1/api/io/netty/channel/ChannelOption.html">channel options</a>
          */
         public <T> Builder option(ChannelOption<T> channelOption, T value) {
@@ -92,7 +91,7 @@ public class Server {
          * Adds a specific option to the connections that are opened with the server's channel.
          *
          * @param channelOption the desired channel option
-         * @param value the value that is supposed to be set for the desired channel option
+         * @param value         the value that is supposed to be set for the desired channel option
          */
         public <T> Builder childOption(ChannelOption<T> channelOption, T value) {
             childOptions.put(channelOption, value);
@@ -103,7 +102,7 @@ public class Server {
          * Adds a specific attribute to the server. The attributes are saved in an attribute map by Netty.
          *
          * @param attributeKey the attribute key that is supposed to be stored in the map.
-         * @param value the value that is supposed to be mapped to the given attribute key.
+         * @param value        the value that is supposed to be mapped to the given attribute key.
          */
         public <T> Builder attribute(AttributeKey<T> attributeKey, T value) {
             attributeKeys.put(attributeKey, value);
@@ -115,7 +114,7 @@ public class Server {
          * just like child options. The attributes are saved in an attribute map by Netty.
          *
          * @param attributeKey the attribute key that is supposed to be stored in the map.
-         * @param value the value that is supposed to be mapped to the given attribute key.
+         * @param value        the value that is supposed to be mapped to the given attribute key.
          */
         public <T> Builder childAttribute(AttributeKey<T> attributeKey, T value) {
             childAttributeKeys.put(attributeKey, value);
@@ -158,7 +157,7 @@ public class Server {
 
         private HydraServer setUpServer() {
             boolean epoll = useEpoll && Epoll.isAvailable();
-            EventLoopGroup workerGroup  = epoll ? new EpollEventLoopGroup(workerThreads) : new NioEventLoopGroup(workerThreads);
+            EventLoopGroup workerGroup = epoll ? new EpollEventLoopGroup(workerThreads) : new NioEventLoopGroup(workerThreads);
             EventLoopGroup bossGroup = epoll ? new EpollEventLoopGroup(bossThreads) : new NioEventLoopGroup(bossThreads);
 
             ServerBootstrap serverBootstrap = new ServerBootstrap()

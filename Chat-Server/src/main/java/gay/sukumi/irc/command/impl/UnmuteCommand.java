@@ -1,39 +1,42 @@
 package gay.sukumi.irc.command.impl;
 
 import gay.sukumi.hydra.shared.handler.Session;
-import gay.sukumi.irc.database.Account;
-import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.command.Command;
+import gay.sukumi.irc.database.Account;
+import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.profile.UserProfile;
+import gay.sukumi.irc.utils.EnumChatFormatting;
 
 public class UnmuteCommand extends Command {
     public UnmuteCommand() {
-        super(new String[]{}, "Unmutes an user.", "unmute");
+        super(new String[]{"user"}, "irc.admin.unmute", "Unmutes an user.", "unmute");
     }
 
     @Override
     public void onExecute(Session session, UserProfile profile, String[] args) {
 
-        if (profile.getRank() != UserProfile.Rank.ADMIN) {
-            session.send(new SMessagePacket("You do not have enough permissions to execute this command. The minimum rank you need for this is Administrator."));
-            return;
-        }
-
         if (args.length < 1) {
-            session.send(new SMessagePacket("Usage: /unmute <user>"));
+            sendUsage(session);
             return;
         }
 
-        Account userProfile = Database.INSTANCE.getUser(args[0]);
-        if (userProfile == null) {
-            session.send(new SMessagePacket("" + args[0] + ": User not found"));
+        /* Check if the account exists */
+        Account account = Database.INSTANCE.getUser(args[0]);
+        if (account == null) {
+            session.send(new SMessagePacket(EnumChatFormatting.DARK_AQUA + args[0] + EnumChatFormatting.RED + " could not be found in the database."));
             return;
         }
-        userProfile.setMuted(false);
-        Database.INSTANCE.editUser(userProfile);
-        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " unmuted " + userProfile.getUsername()));
+
+        /* Set the muted status to false */
+        account.setMuted(false);
+
+        /* Modify the users account in the database */
+        Database.INSTANCE.editUser(account);
+
+        session.send(new SMessagePacket(EnumChatFormatting.GREEN + "Successfully unmuted " + EnumChatFormatting.DARK_AQUA + args[0] + EnumChatFormatting.GREEN + "."));
+        ChatServer.INSTANCE.broadcastPacket(new SMessagePacket(profile.getUsername() + " unmuted " + account.getUsername()));
         super.onExecute(session, profile, args);
     }
 }

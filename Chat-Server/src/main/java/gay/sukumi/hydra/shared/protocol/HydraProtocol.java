@@ -18,13 +18,13 @@ import java.util.*;
  */
 public class HydraProtocol {
 
-    private Map<Byte, Class<? extends Packet>> packets = new HashMap<>();
+    private final Map<Byte, Class<? extends Packet>> packets = new HashMap<>();
 
-    private Map<Class<? extends Packet>, Byte> packetBytes = new HashMap<>();
+    private final Map<Class<? extends Packet>, Byte> packetBytes = new HashMap<>();
 
-    private Map<Class<?>, Method> packetListenerMethods = new HashMap<>();
+    private final Map<Class<?>, Method> packetListenerMethods = new HashMap<>();
 
-    private Set<Session> sessions = new HashSet<>();
+    private final Set<Session> sessions = new HashSet<>();
 
     private Session clientSession;
 
@@ -132,12 +132,12 @@ public class HydraProtocol {
         }
     }
 
-    public void setClientSession(Session clientSession) {
-        this.clientSession = clientSession;
-    }
-
     public Session getClientSession() {
         return clientSession;
+    }
+
+    public void setClientSession(Session clientSession) {
+        this.clientSession = clientSession;
     }
 
     public void addSession(Session session) {

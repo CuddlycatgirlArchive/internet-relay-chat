@@ -15,7 +15,6 @@ import org.bson.conversions.Bson
 import java.util.logging.Level
 import java.util.logging.Logger
 import java.util.regex.Pattern
-import javax.print.Doc
 
 
 class Database {
@@ -49,9 +48,20 @@ class Database {
         val list = usersCollection.find(and(eq("username", username)))
             .collation(collation)
             .toList()
-        val document = usersCollection.find(Document("username", Pattern.compile(".*$username.*", Pattern.CASE_INSENSITIVE))).first()
+        val document =
+            usersCollection.find(Document("username", Pattern.compile(".*$username.*", Pattern.CASE_INSENSITIVE)))
+                .first()
         if (document != null) {
-            return Account(document.getString("username"), document.getString("password"), Rank.valueOf(document.getString("rank")), document.getBoolean("muted"), document.getBoolean("banned"))
+            val account = Account(
+                document.getString("username"),
+                document.getString("password"),
+                Rank.valueOf(document.getString("rank")),
+                document.getBoolean("muted"),
+                document.getBoolean("banned"),
+                document.getString("group"),
+            )
+            account.permissions = document.getList("permissions", String::class.java)
+            return account
         }
         return null
     }
@@ -60,10 +70,13 @@ class Database {
         val usersCollection = mongoDB.getCollection("users")
         val query = Document().append("username", account.username)
         val updates: Bson = Updates.combine(
-                Updates.set("password", account.password),
-                Updates.set("muted", account.isMuted),
-                Updates.set("banned", account.isBanned),
-                Updates.set("rank", account.rank.name))
+            Updates.set("password", account.password),
+            Updates.set("muted", account.isMuted),
+            Updates.set("banned", account.isBanned),
+            Updates.set("rank", account.rank.name),
+            Updates.set("group", account.group),
+            Updates.set("permissions", account.permissions)
+        )
 
         usersCollection.updateOne(query, updates)
     }
@@ -77,7 +90,8 @@ class Database {
 
     fun createUser(account: Account) {
         val usersCollection = mongoDB.getCollection("users")
-        val accounts = Document("username", account.username).append("password", account.password).append("rank", account.rank.name).append("muted", account.isMuted).append("banned", account.isBanned)
+        val accounts = Document("username", account.username).append("password", account.password)
+            .append("rank", account.rank.name).append("muted", account.isMuted).append("banned", account.isBanned).append("group", account.group).append("permissions", ArrayList<String>())
         usersCollection.insertOne(accounts)
     }
 

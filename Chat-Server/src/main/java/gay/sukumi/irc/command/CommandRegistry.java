@@ -2,12 +2,15 @@ package gay.sukumi.irc.command;
 
 
 import gay.sukumi.hydra.shared.handler.Session;
-import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.command.impl.*;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
+import gay.sukumi.irc.permissions.MeowPerms;
 import gay.sukumi.irc.profile.UserProfile;
+import gay.sukumi.irc.utils.EnumChatFormatting;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CommandRegistry {
 
@@ -16,8 +19,8 @@ public class CommandRegistry {
     public void init() {
         addCommand(new UnmuteCommand());
         addCommand(new MuteCommand());
+        addCommand(new PermsCommand());
         addCommand(new RemoveUserCommand());
-        addCommand(new RankCommand());
         addCommand(new PasswordCommand());
         addCommand(new AddUserCommand());
     }
@@ -45,7 +48,12 @@ public class CommandRegistry {
         final String[] a = Arrays.copyOfRange(s, 1, s.length);
         final Command command = this.getCommand(c);
         if (command == null) {
-            session.send(new SMessagePacket(null, SMessagePacket.Type.RAW, "Invalid command."));
+            session.send(new SMessagePacket(EnumChatFormatting.RED + "This command does not exist."));
+            return;
+        }
+
+        if(!command.getPermission().isEmpty() && !MeowPerms.INSTANCE.getPermissionManager().hasPermission(command.getPermission(), profile)) {
+            session.send(new SMessagePacket(String.format("%sYou need the permission %s'%s%s%s'%s.", EnumChatFormatting.RED, EnumChatFormatting.GRAY, EnumChatFormatting.DARK_AQUA, command.getPermission(), EnumChatFormatting.GRAY, EnumChatFormatting.RED)));
             return;
         }
 

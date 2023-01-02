@@ -7,10 +7,12 @@ import io.netty.buffer.ByteBuf;
 @PacketId(26)
 public class SKeepAlivePacket extends Packet {
 
-    public SKeepAlivePacket() {}
+    public SKeepAlivePacket() {
+    }
 
     @Override
-    public void read(ByteBuf byteBuf) {}
+    public void read(ByteBuf byteBuf) {
+    }
 
     @Override
     public void write(ByteBuf byteBuf) {

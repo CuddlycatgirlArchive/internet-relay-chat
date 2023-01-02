@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf;
 
 import java.io.*;
 import java.lang.reflect.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -31,24 +32,15 @@ public abstract class Packet {
     protected void writeString(ByteBuf byteBuf, String string) {
         byteBuf.writeInt(string.length());
 
-        try {
-            byteBuf.writeBytes(string.getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        byteBuf.writeBytes(string.getBytes(StandardCharsets.UTF_8));
     }
 
     protected String readString(ByteBuf byteBuf) {
         byte[] bytes = new byte[byteBuf.readInt()];
         byteBuf.readBytes(bytes);
 
-        try {
-            return new String(bytes, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        return new String(bytes, StandardCharsets.UTF_8);
 
-        return null;
     }
 
     protected void writeObject(ByteBuf byteBuf, Object object) {

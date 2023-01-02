@@ -18,9 +18,9 @@ import io.netty.handler.timeout.IdleStateHandler;
  */
 public class HydraChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
-    private boolean isServer;
+    private final boolean isServer;
 
     public HydraChannelInitializer(HydraProtocol protocol, boolean isServer) {
         this.protocol = protocol;

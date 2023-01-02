@@ -9,7 +9,7 @@ import java.net.SocketAddress;
 
 /**
  * Created with love by DataSecs on 01.10.2017.
- *
+ * <p>
  * A session in Hydra represents a connection between two sockets. It includes netty's channel and all other options to
  * write to the pipeline. The session is supposed to be the most important part for the user, as it provides the possibility
  * to write to the channel of the session and interact with the connected opponent (client or server,

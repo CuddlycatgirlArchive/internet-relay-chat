@@ -12,6 +12,7 @@ import io.netty.util.internal.ConcurrentSet;
 
 import java.net.SocketAddress;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -25,11 +26,11 @@ import java.util.Set;
  */
 public class HydraServer {
 
-    private Channel channel;
+    private final Channel channel;
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
-    private EventLoopGroup[] loopGroups;
+    private final EventLoopGroup[] loopGroups;
 
     public HydraServer(Channel channel, HydraProtocol protocol, EventLoopGroup[] loopGroups) {
         this.channel = channel;
@@ -112,16 +113,14 @@ public class HydraServer {
     /**
      * Sends a packet to all clients that are connected to the server with the specified distribution type.
      *
-     * @param packet the packet that is supposed to be send to all connected clients.
+     * @param packet           the packet that is supposed to be send to all connected clients.
      * @param distributionType the type of distribution that is supposed to be used.
      */
     public void send(Packet packet, Distribution distributionType) {
-        switch (distributionType) {
-            case SIMPLE_BROADCAST:
-                ConcurrentSet<Session> sessions = new ConcurrentSet<>();
-                sessions.addAll(protocol.getSessions());
-                sessions.forEach(session -> session.send(packet));
-                break;
+        if (Objects.requireNonNull(distributionType) == Distribution.SIMPLE_BROADCAST) {
+            ConcurrentSet<Session> sessions = new ConcurrentSet<>();
+            sessions.addAll(protocol.getSessions());
+            sessions.forEach(session -> session.send(packet));
         }
     }
 }

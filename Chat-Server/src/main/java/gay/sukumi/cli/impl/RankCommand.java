@@ -23,7 +23,7 @@ public class RankCommand extends Command {
             System.out.println(" \033[91mUser not found");
             return;
         }
-        if(userProfile.getRank() == UserProfile.Rank.USER) {
+        if (userProfile.getRank() == UserProfile.Rank.USER) {
             userProfile.setRank(UserProfile.Rank.ADMIN);
         } else {
             userProfile.setRank(UserProfile.Rank.USER);

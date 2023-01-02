@@ -1,7 +1,6 @@
 package gay.sukumi.irc.handler;
 
 import gay.sukumi.irc.ChatServer;
-import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
@@ -18,6 +17,7 @@ public class KeepAliveHandler extends ChannelDuplexHandler {
                     ctx.close();
                 }
             }
-        } catch(Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 }

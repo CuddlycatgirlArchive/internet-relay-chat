@@ -7,10 +7,12 @@ import io.netty.buffer.ByteBuf;
 @PacketId(25)
 public class CKeepAlivePacket extends Packet {
 
-    public CKeepAlivePacket() {}
+    public CKeepAlivePacket() {
+    }
 
     @Override
-    public void read(ByteBuf byteBuf) {}
+    public void read(ByteBuf byteBuf) {
+    }
 
     @Override
     public void write(ByteBuf byteBuf) {

@@ -2,7 +2,7 @@ package gay.sukumi.hydra.shared.protocol.packets.listener;
 
 /**
  * Created with love by DataSecs on 29.09.2017.
- *
+ * <p>
  * The HydraPacketListener interface is a wrapper for every kind of listener that is supposed to handle packet events.
  * Simply implement it, but use the {@link Handler} for methods that are supposed to handle a packet.
  * <br>

@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * Created with love by DataSecs on 02.12.2017.
- *
+ * <p>
  * The session listener interface is supposed to provide the user the opportunity to easily catch the probably
  * most important session events. The connecting and disconnecting of clients. The interface works for both sides,
  * client, as well as server.

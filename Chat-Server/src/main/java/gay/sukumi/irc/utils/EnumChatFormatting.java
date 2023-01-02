@@ -1,15 +1,12 @@
 package gay.sukumi.irc.utils;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Map;
 
 @SuppressWarnings("all")
-public enum EnumChatFormatting
-{
+public enum EnumChatFormatting {
     BLACK("BLACK", 0, "BLACK", '0', 0),
     DARK_BLUE("DARK_BLUE", 1, "DARK_BLUE", '1', 1),
     DARK_GREEN("DARK_GREEN", 2, "DARK_GREEN", '2', 2),
@@ -35,11 +32,13 @@ public enum EnumChatFormatting
 
     private static final Map<Object, Object> nameMapping;
     private static final Pattern formattingCodePattern;
-    private final String controlString;
 
-    private static String func_175745_c(final String p_175745_0_) {
-        return p_175745_0_.toLowerCase().replaceAll("[^a-z]", "");
+    static {
+        nameMapping = new HashMap<>();
+        formattingCodePattern = Pattern.compile("(?i)\u00A7[0-9A-FK-OR]");
     }
+
+    private final String controlString;
 
     private EnumChatFormatting(final String name, final int id, final String id3, final char code, final int id2) {
         this(name, id, id3, code, false);
@@ -53,9 +52,8 @@ public enum EnumChatFormatting
         this.controlString = "\u00A7" + p_i46293_4_;
     }
 
-    @Override
-    public String toString() {
-        return this.controlString;
+    private static String func_175745_c(final String p_175745_0_) {
+        return p_175745_0_.toLowerCase().replaceAll("[^a-z]", "");
     }
 
     public static String getTextWithoutFormattingCodes(final String p_110646_0_) {
@@ -72,8 +70,8 @@ public enum EnumChatFormatting
         return cleanData == null ? text : cleanData;
     }
 
-    static {
-        nameMapping = new HashMap<>();
-        formattingCodePattern = Pattern.compile("(?i)\u00A7[0-9A-FK-OR]");
+    @Override
+    public String toString() {
+        return this.controlString;
     }
 }

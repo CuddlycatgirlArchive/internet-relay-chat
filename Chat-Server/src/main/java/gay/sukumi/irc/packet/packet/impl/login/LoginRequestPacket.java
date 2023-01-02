@@ -1,6 +1,5 @@
 package gay.sukumi.irc.packet.packet.impl.login;
 
-import com.google.common.base.CharMatcher;
 import gay.sukumi.hydra.shared.protocol.packets.Packet;
 import gay.sukumi.hydra.shared.protocol.packets.PacketId;
 import gay.sukumi.irc.profile.UserProfile;
@@ -14,7 +13,8 @@ public class LoginRequestPacket extends Packet {
     private UserProfile.Client client;
 
     /* Empty constructor for Hydra, I don't know why it's like that. */
-    public LoginRequestPacket() {}
+    public LoginRequestPacket() {
+    }
 
     @Override
     public void read(ByteBuf byteBuf) {
@@ -25,7 +25,8 @@ public class LoginRequestPacket extends Packet {
     }
 
     @Override
-    public void write(ByteBuf byteBuf) {}
+    public void write(ByteBuf byteBuf) {
+    }
 
     public String getUsername() {
         return username;

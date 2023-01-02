@@ -3,17 +3,20 @@ package gay.sukumi.irc.command;
 import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.profile.UserProfile;
+import gay.sukumi.irc.utils.EnumChatFormatting;
 
 public class Command {
 
     final String[] aliases;
     final String[] usageParameter;
+    final String permission;
     final String description;
 
-    public Command(final String[] usageParameter, final String description, final String... aliases) {
+    public Command(final String[] usageParameter, final String permission, final String description, final String... aliases) {
         if (aliases.length == 0) this.aliases = new String[]{this.getClass().getSimpleName().replace("Command", "")};
         else this.aliases = aliases;
         this.usageParameter = usageParameter;
+        this.permission = permission;
         this.description = description;
     }
 
@@ -29,6 +32,11 @@ public class Command {
         return this.description;
     }
 
+
+    public String getPermission() {
+        return permission;
+    }
+
     public void onExecute(Session session, UserProfile profile, final String[] args) {
     }
 
@@ -36,7 +44,7 @@ public class Command {
         StringBuilder usages = new StringBuilder();
         for (final String usage : this.getUsageParameter())
             usages.append(" <").append(usage).append(">");
-        session.send(new SMessagePacket(null, SMessagePacket.Type.RAW, getAliases()[0] + usages));
+        session.send(new SMessagePacket(String.format("%sUsage: %s/%s%s.", EnumChatFormatting.RED, EnumChatFormatting.WHITE, getAliases()[0] + usages, EnumChatFormatting.RED)));
     }
 
     public String getAliasesAsString() {

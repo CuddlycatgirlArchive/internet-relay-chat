@@ -16,6 +16,7 @@ public class CommandRegistry {
         addCommand(new HelpCommand());
         addCommand(new UnmuteCommand());
         addCommand(new MuteCommand());
+        addCommand(new StopCommand());
         addCommand(new BroadcastCommand());
         addCommand(new SendAsCommand());
         addCommand(new PasswordCommand());

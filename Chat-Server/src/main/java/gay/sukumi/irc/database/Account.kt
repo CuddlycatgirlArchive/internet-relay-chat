@@ -7,5 +7,10 @@ class Account(
     var password: String,
     var rank: UserProfile.Rank,
     var isMuted: Boolean,
-    var isBanned: Boolean
-)
+    var isBanned: Boolean,
+    var group: String
+) {
+
+    var permissions: List<String> = ArrayList()
+
+}

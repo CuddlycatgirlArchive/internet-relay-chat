@@ -11,7 +11,8 @@ public class CMessagePacket extends Packet {
     private String uuid;
     private String message;
 
-    public CMessagePacket() {}
+    public CMessagePacket() {
+    }
 
     public CMessagePacket(final String message) {
         this.message = message;

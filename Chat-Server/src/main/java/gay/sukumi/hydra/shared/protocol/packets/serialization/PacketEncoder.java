@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PacketEncoder extends MessageToMessageEncoder<Packet> {
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
     public PacketEncoder(HydraProtocol protocol) {
         this.protocol = protocol;

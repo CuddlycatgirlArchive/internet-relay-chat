@@ -1,8 +1,8 @@
 package gay.sukumi.irc.command.impl;
 
 import gay.sukumi.hydra.shared.handler.Session;
-import gay.sukumi.irc.ChatServer;
 import gay.sukumi.irc.command.Command;
+import gay.sukumi.irc.config.Configuration;
 import gay.sukumi.irc.database.Account;
 import gay.sukumi.irc.database.Database;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
@@ -11,7 +11,7 @@ import gay.sukumi.irc.utils.EnumChatFormatting;
 
 public class PasswordCommand extends Command {
     public PasswordCommand() {
-        super(new String[]{"user", "password"}, "Changes a users password", "pwd", "passwd", "changepw");
+        super(new String[]{"user", "password"}, "irc.admin.passwd", "Changes a users password", "pwd", "passwd", "changepw");
     }
 
     @Override
@@ -21,20 +21,17 @@ public class PasswordCommand extends Command {
             return;
         }
 
-        if (profile.getRank() != UserProfile.Rank.ADMIN && !profile.getUsername().equalsIgnoreCase("Lucy")) {
-            session.send(new SMessagePacket(EnumChatFormatting.RED + "You need the " + EnumChatFormatting.DARK_AQUA + "Super Administrator" + EnumChatFormatting.RED + " rank for this command."));
-            return;
-        }
-
-
         Account userProfile = Database.INSTANCE.getUser(args[0]);
         if (userProfile == null) {
-            session.send(new SMessagePacket(EnumChatFormatting.RED + "User doesn't exist."));
+            session.send(new SMessagePacket(EnumChatFormatting.DARK_AQUA + args[0] + EnumChatFormatting.RED + " could not be found in the database."));
             return;
         }
+
         userProfile.setPassword(args[1]);
+
         Database.INSTANCE.editUser(userProfile);
-        session.send(new SMessagePacket(EnumChatFormatting.GREEN + "Changed "+ EnumChatFormatting.DARK_AQUA + userProfile.getUsername() + EnumChatFormatting.GREEN + "'s password successfully."));
+
+        session.send(new SMessagePacket(EnumChatFormatting.GREEN + "Changed " + EnumChatFormatting.DARK_AQUA + userProfile.getUsername() + EnumChatFormatting.GREEN + "'s password successfully."));
     }
 }
 

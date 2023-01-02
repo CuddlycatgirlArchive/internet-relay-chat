@@ -10,7 +10,8 @@ public class StandardPacket extends Packet {
 
     private Object object;
 
-    public StandardPacket() {}
+    public StandardPacket() {
+    }
 
     public StandardPacket(Object object) {
         this.object = object;

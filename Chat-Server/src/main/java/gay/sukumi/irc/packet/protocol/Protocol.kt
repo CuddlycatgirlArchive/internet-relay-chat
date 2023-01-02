@@ -3,10 +3,10 @@ package gay.sukumi.irc.packet.protocol
 import gay.sukumi.hydra.shared.protocol.HydraProtocol
 import gay.sukumi.irc.ChatServer
 import gay.sukumi.irc.packet.packet.PacketHandler
-import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket
 import gay.sukumi.irc.packet.packet.impl.chat.CMessagePacket
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket
 import gay.sukumi.irc.packet.packet.impl.keepalive.CKeepAlivePacket
+import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginErrorPacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginRequestPacket
 import gay.sukumi.irc.packet.packet.impl.login.LoginSuccessPacket
@@ -37,7 +37,7 @@ class Protocol : HydraProtocol() {
     }
 
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
-        if(cause is ReadTimeoutException) {
+        if (cause is ReadTimeoutException) {
             ChatServer.LOGGER.info("Disconnected '" + ChatServer.INSTANCE.getProfileByChannel(ctx.channel()).username + "' for not sending keep-alive packets")
             return
         }

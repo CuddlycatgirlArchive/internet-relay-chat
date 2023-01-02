@@ -7,6 +7,7 @@ public class Crypter {
 
     /**
      * Encode the Message to make it secure.
+     *
      * @param string the Message
      * @return the secure Message.
      */
@@ -17,6 +18,7 @@ public class Crypter {
 
     /**
      * Decode the Message to get the original String.
+     *
      * @param string the encoded String.
      * @return the original String.
      */

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PacketDecoder extends MessageToMessageDecoder<ByteBuf> {
 
-    private HydraProtocol protocol;
+    private final HydraProtocol protocol;
 
     public PacketDecoder(HydraProtocol protocol) {
         this.protocol = protocol;
@@ -23,7 +23,7 @@ public class PacketDecoder extends MessageToMessageDecoder<ByteBuf> {
     protected void decode(ChannelHandlerContext context, ByteBuf in, List<Object> out) {
         int length = in.readInt();
 
-        if(length > 0) {
+        if (length > 0) {
             Packet packet = protocol.createPacket(in.readByte());
             packet.read(in);
             out.add(packet);
