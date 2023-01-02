@@ -42,7 +42,7 @@ public class Configuration {
             try (InputStream in = Files.newInputStream(Paths.get("irc.yml"))) {
                 configurations = yaml.loadAs(in, Configurations.class);
             }
-            Runtime.getRuntime().addShutdownHook(new Thread(this::save));
+
         } catch (Exception ignored) {}
     }
 
