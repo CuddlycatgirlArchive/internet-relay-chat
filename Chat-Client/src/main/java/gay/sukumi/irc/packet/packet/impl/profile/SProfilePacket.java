@@ -1,7 +1,7 @@
 package gay.sukumi.irc.packet.packet.impl.profile;
 
-import de.datasecs.hydra.shared.protocol.packets.Packet;
-import de.datasecs.hydra.shared.protocol.packets.PacketId;
+import gay.sukumi.hydra.shared.protocol.packets.Packet;
+import gay.sukumi.hydra.shared.protocol.packets.PacketId;
 import gay.sukumi.irc.profile.UserProfile;
 import io.netty.buffer.ByteBuf;
 

@@ -1,6 +1,6 @@
 package gay.sukumi.irc.listener;
 
-import de.datasecs.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.profile.UserProfile;
 import gay.sukumi.irc.utils.Errors;
 

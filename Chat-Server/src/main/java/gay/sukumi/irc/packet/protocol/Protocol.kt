@@ -41,7 +41,7 @@ class Protocol : HydraProtocol() {
             ChatServer.LOGGER.info("Disconnected '" + ChatServer.INSTANCE.getProfileByChannel(ctx.channel()).username + "' for not sending keep-alive packets")
             return
         }
-        cause.printStackTrace()
+//        cause.printStackTrace()
         super.exceptionCaught(ctx, cause)
     }
 

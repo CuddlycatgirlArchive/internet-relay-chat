@@ -14,6 +14,7 @@ import gay.sukumi.irc.packet.packet.impl.profile.SProfilePacket;
 import gay.sukumi.irc.packet.protocol.Protocol;
 import gay.sukumi.irc.profile.UserProfile;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -87,6 +88,11 @@ public class ChatServer {
                             getProfileHashMap().remove(session);
                             LOGGER.info(String.format("User '%s' logged out.", userProfile.getUsername()));
                         }
+                    }
+
+                    @Override
+                    public void exceptionCaught(ChannelHandlerContext ctx, Throwable throwable) {
+
                     }
                 }).build();
 

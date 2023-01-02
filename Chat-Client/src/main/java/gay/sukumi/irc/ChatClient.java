@@ -1,10 +1,10 @@
 package gay.sukumi.irc;
 
-import de.datasecs.hydra.client.Client;
-import de.datasecs.hydra.client.HydraClient;
-import de.datasecs.hydra.shared.handler.Session;
-import de.datasecs.hydra.shared.handler.listener.HydraSessionListener;
-import de.datasecs.hydra.shared.protocol.packets.Packet;
+import gay.sukumi.hydra.client.Client;
+import gay.sukumi.hydra.client.HydraClient;
+import gay.sukumi.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.listener.HydraSessionListener;
+import gay.sukumi.hydra.shared.protocol.packets.Packet;
 import gay.sukumi.irc.handler.KeepAliveHandler;
 import gay.sukumi.irc.listener.ConnectionListener;
 import gay.sukumi.irc.listener.LoginListener;

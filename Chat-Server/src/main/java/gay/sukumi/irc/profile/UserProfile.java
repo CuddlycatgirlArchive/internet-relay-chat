@@ -71,7 +71,7 @@ public class UserProfile {
 
     public enum Client {
 
-        SUKUMI("Sukumi"), VOLT("Volt");
+        SUKUMI("Sukumi"), VOLT("Volt"), VELOCITY("Velocity"), ETERNAL("Eternal");
 
         final String name;
 

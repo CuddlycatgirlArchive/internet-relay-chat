@@ -37,13 +37,13 @@ class PacketHandler : HydraPacketListener {
     fun onPacket(packet: LoginRequestPacket, session: Session) {
         val account = Database.INSTANCE.getUser(packet.username)
         if (account == null) {
-            ChatServer.LOGGER.info("Failed login attempt from '" + session.address.toString() + "'")
+            ChatServer.LOGGER.info("Failed login attempt from '" + session.address.toString() + "' (User not existing)")
             session.send(LoginErrorPacket(Errors.INVALID_PASSWORD))
             return
         }
 
-        if (!account.password.equals(packet.password, ignoreCase = true)) {
-            ChatServer.LOGGER.info("Failed login attempt from '" + session.address.toString() + "'")
+        if (!account.password.equals(packet.password, ignoreCase = false)) {
+            ChatServer.LOGGER.info("Failed login attempt from '" + session.address.toString() + "' (Password invalid)")
             session.send(LoginErrorPacket(Errors.INVALID_PASSWORD))
             return
         }

@@ -1,6 +1,6 @@
 package gay.sukumi.irc.packet.protocol;
 
-import de.datasecs.hydra.shared.protocol.HydraProtocol;
+import gay.sukumi.hydra.shared.protocol.HydraProtocol;
 import gay.sukumi.irc.packet.packet.PacketHandler;
 import gay.sukumi.irc.packet.packet.impl.chat.CMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;

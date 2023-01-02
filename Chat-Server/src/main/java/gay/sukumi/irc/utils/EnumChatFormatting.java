@@ -3,6 +3,7 @@ package gay.sukumi.irc.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Map;
 
@@ -59,6 +60,16 @@ public enum EnumChatFormatting
 
     public static String getTextWithoutFormattingCodes(final String p_110646_0_) {
         return (p_110646_0_ == null) ? null : EnumChatFormatting.formattingCodePattern.matcher(p_110646_0_).replaceAll("");
+    }
+
+    public static String getCleanText(String text) {
+        Pattern unicodeCharsPattern = Pattern.compile("\\\\u(\\p{XDigit}{4})");
+        Matcher unicodeMatcher = unicodeCharsPattern.matcher(text);
+        String cleanData = null;
+        if (unicodeMatcher.find()) {
+            cleanData = unicodeMatcher.replaceAll("");
+        }
+        return cleanData == null ? text : cleanData;
     }
 
     static {

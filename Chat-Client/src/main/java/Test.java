@@ -1,6 +1,5 @@
-import de.datasecs.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.handler.Session;
 import gay.sukumi.irc.ChatClient;
-import gay.sukumi.irc.listener.ConnectionListener;
 import gay.sukumi.irc.listener.LoginListener;
 import gay.sukumi.irc.listener.UserProfileListener;
 import gay.sukumi.irc.packet.packet.impl.chat.CMessagePacket;
@@ -53,12 +52,12 @@ public class Test {
             }
 
             @Override
-            public void onNameChange(UserProfile newProfile, UserProfile oldProfile) {
+            public void onNameChange(UserProfile newProfile) {
                 System.out.println(newProfile.getUsername() + " changed their mc name to '" + newProfile.getMcUsername() + "'!");
             }
 
             @Override
-            public void onServerChange(UserProfile newProfile, UserProfile oldProfile) {
+            public void onServerChange(UserProfile newProfile) {
                 System.out.println("Changed their server");
             }
 

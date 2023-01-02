@@ -1,7 +1,6 @@
 package gay.sukumi.hydra.shared.handler.listener;
 
 import gay.sukumi.hydra.shared.handler.Session;
-import io.netty.channel.ChannelHandlerContext;
 
 /**
  * Created with love by DataSecs on 02.12.2017.
@@ -32,11 +31,4 @@ public interface HydraSessionListener {
      * @param session the session that is supposed to be listened on.
      */
     void onDisconnected(Session session);
-
-    /**
-     * This method gets fired when yes.
-     *
-     * @param session the session that is supposed to be listened on.
-     */
-    void exceptionCaught(ChannelHandlerContext ctx, Throwable throwable);
 }

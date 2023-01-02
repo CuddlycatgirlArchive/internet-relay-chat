@@ -1,9 +1,9 @@
 package gay.sukumi.irc.packet.packet;
 
 
-import de.datasecs.hydra.shared.handler.Session;
-import de.datasecs.hydra.shared.protocol.packets.listener.Handler;
-import de.datasecs.hydra.shared.protocol.packets.listener.HydraPacketListener;
+import gay.sukumi.hydra.shared.handler.Session;
+import gay.sukumi.hydra.shared.protocol.packets.listener.Handler;
+import gay.sukumi.hydra.shared.protocol.packets.listener.HydraPacketListener;
 import gay.sukumi.irc.ChatClient;
 import gay.sukumi.irc.packet.packet.impl.chat.SMessagePacket;
 import gay.sukumi.irc.packet.packet.impl.keepalive.SKeepAlivePacket;

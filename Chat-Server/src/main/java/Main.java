@@ -11,7 +11,9 @@ public class Main {
         CommandRegistry commandRegistry = new CommandRegistry();
         commandRegistry.init();
         Database.INSTANCE.connect();
-        ChatServer.INSTANCE.bind(new InetSocketAddress(8888));
+        try {
+            ChatServer.INSTANCE.bind(new InetSocketAddress(8888));
+        } catch(Exception ignored) {}
         Scanner scanner = new Scanner(System.in);
         System.out.print("\033[0m");
         while (scanner.hasNextLine()) {
